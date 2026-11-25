@@ -1,3 +1,11 @@
+<details open>
+<summary><b>❄️ Live India Weather & Pixel Janitor</b> <sub>(click to turn off / hide animation)</sub></summary>
+<br/>
+<img src="./weather_scene.svg" width="100%" alt="Live India Weather and Pixel Janitor" />
+</details>
+
+<br/>
+
 <div align="center">
 
 ## E1M1 // ADITYA'S LSM-HANGAR — PLAYABLE 3D DOOM
