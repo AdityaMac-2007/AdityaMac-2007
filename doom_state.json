@@ -1,0 +1,32 @@
+{
+  "x": 1.5,
+  "y": 7.5,
+  "angle": -0.78,
+  "hp": 100,
+  "armor": 100,
+  "ammo": 50,
+  "frags": 0,
+  "enemies": [
+    {
+      "id": "CACODEMON-01",
+      "x": 4.5,
+      "y": 5.5,
+      "hp": 60
+    },
+    {
+      "id": "CYBER-IMP-02",
+      "x": 6.5,
+      "y": 3.5,
+      "hp": 40
+    },
+    {
+      "id": "BARON-03",
+      "x": 2.5,
+      "y": 2.5,
+      "hp": 80
+    }
+  ],
+  "last_log": "NEW RUN STARTED BY @AdityaMac-2007 // RIP & TEAR",
+  "last_player": "AdityaMac-2007",
+  "fired": false
+}
