@@ -1,32 +1,38 @@
 {
-  "x": 1.5,
-  "y": 7.5,
-  "angle": -0.78,
+  "x": 4.5,
+  "y": 7.35,
+  "angle": -1.5708,
   "hp": 100,
   "armor": 100,
   "ammo": 50,
   "frags": 0,
   "enemies": [
     {
-      "id": "CACODEMON-01",
+      "id": "CACODEMON",
       "x": 4.5,
-      "y": 5.5,
-      "hp": 60
+      "y": 4.7,
+      "hp": 60,
+      "max_hp": 60,
+      "kind": "caco"
     },
     {
-      "id": "CYBER-IMP-02",
-      "x": 6.5,
-      "y": 3.5,
-      "hp": 40
+      "id": "CYBER-IMP",
+      "x": 3.1,
+      "y": 2.9,
+      "hp": 40,
+      "max_hp": 40,
+      "kind": "imp"
     },
     {
-      "id": "BARON-03",
-      "x": 2.5,
-      "y": 2.5,
-      "hp": 80
+      "id": "HELL-BARON",
+      "x": 5.9,
+      "y": 2.4,
+      "hp": 80,
+      "max_hp": 80,
+      "kind": "baron"
     }
   ],
-  "last_log": "NEW RUN STARTED BY @AdityaMac-2007 // RIP & TEAR",
+  "last_log": "E1M1 RESET BY @AdityaMac-2007 // TARGET LOCKED",
   "last_player": "AdityaMac-2007",
   "fired": false
 }
