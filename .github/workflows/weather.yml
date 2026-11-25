@@ -1,0 +1,39 @@
+name: Live India Season & Pixel Janitor
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+    inputs:
+      season:
+        description: "Season (auto, winter, monsoon, autumn, spring)"
+        default: "winter"
+      temp_c:
+        description: "Temperature in C (e.g. 16.5)"
+        default: "16.5"
+
+permissions:
+  contents: write
+
+jobs:
+  render-weather:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout profile repo
+        uses: actions/checkout@v4
+
+      - name: Render pixel janitor seasonal scene
+        env:
+          SEASON_INPUT: ${{ github.event.inputs.season }}
+          TEMP_INPUT: ${{ github.event.inputs.temp_c }}
+        run: |
+          python3 weather_scene.py "${SEASON_INPUT:-auto}" "${TEMP_INPUT:-16.5}" "0"
+
+      - name: Commit updated weather_scene.svg
+        run: |
+          git config user.name "Weather-Janitor-Bot"
+          git config user.email "janitor-bot@users.noreply.github.com"
+          git add weather_scene.svg
+          git diff --staged --quiet || git commit -m "Update India seasonal janitor scene"
+          git push
