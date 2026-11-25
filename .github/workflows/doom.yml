@@ -1,0 +1,54 @@
+name: DOOM Engine (Playable Profile)
+
+on:
+  issues:
+    types: [opened]
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "DOOM command (forward, back, left, right, fire, reset)"
+        default: "reset"
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  doom-step:
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.event.issue.title, 'DOOM:')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout profile repo
+        uses: actions/checkout@v4
+
+      - name: Step 3D Raycaster & Render Frame
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          INPUT_ACTION: ${{ github.event.inputs.action }}
+          PLAYER: ${{ github.actor }}
+        run: |
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            CMD="${INPUT_ACTION:-reset}"
+          else
+            CMD="${ISSUE_TITLE#DOOM:}"
+          fi
+          python3 doom_engine.py "$CMD" "$PLAYER"
+
+      - name: Commit updated DOOM frame & state
+        run: |
+          git config user.name "DOOM-Bot"
+          git config user.email "doom-bot@users.noreply.github.com"
+          git add doom_frame.svg doom_state.json
+          git diff --staged --quiet || git commit -m "DOOM frame update by @${{ github.actor }}"
+          git push
+
+      - name: Close command issue
+        if: github.event_name == 'issues'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUM: ${{ github.event.issue.number }}
+        run: |
+          gh issue comment "$ISSUE_NUM" --body "Move rendered! Refresh https://github.com/AdityaMac-2007 to see the updated 3D DOOM frame."
+          gh issue close "$ISSUE_NUM"
